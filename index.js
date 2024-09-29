@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.get('/' , (req , res , next) => {
 
-	return res.json({message : "Successfully"});
+	return res.json({message : "Get Successfully"});
 
 });
 
