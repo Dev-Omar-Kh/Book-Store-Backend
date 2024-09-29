@@ -16,6 +16,12 @@ app.use(express.json());
 // app.use("/book", bookRoutes);
 // app.use("/authentication", authRoutes);
 
+app.get('/' , (req , res , next) => {
+
+	return res.json({message : "Successfully"});
+
+});
+
 //Error handler route
 app.use((err, req, res, next) => {
 	const statusCode = err.statusCode || 500;
