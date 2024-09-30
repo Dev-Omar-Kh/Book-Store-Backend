@@ -1,9 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-// import userRoutes from "./routes/user.routes.js";
-// import authRoutes from "./routes/auth.routes.js";
-// import bookRoutes from "./routes/book.routes.js";
+import userRoutes from "./routes/user.routes.js";
+import authRoutes from "./routes/auth.routes.js";
+import bookRoutes from "./routes/book.routes.js";
 import cors from "cors";
 // Load environment variables from .env file
 dotenv.config();
@@ -12,15 +12,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// app.use("/user", userRoutes);
-// app.use("/book", bookRoutes);
-// app.use("/authentication", authRoutes);
-
-app.get('/' , (req , res , next) => {
-
-	return res.json({message : "Get Successfully"});
-
-});
+app.use("/user", userRoutes);
+app.use("/book", bookRoutes);
+app.use("/authentication", authRoutes);
 
 //Error handler route
 app.use((err, req, res, next) => {
