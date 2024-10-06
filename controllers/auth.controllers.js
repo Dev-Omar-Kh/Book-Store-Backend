@@ -30,6 +30,7 @@ export const emailSignIn = async (req, res, next) => {
 			process.env.SECRET_KEY,
 			{ expiresIn: "1h" }
 		);
+		console.log(token);
 
 		const { password, ...rest } = user._doc;
 

@@ -5,12 +5,14 @@ import userRoutes from "./routes/user.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import bookRoutes from "./routes/book.routes.js";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 // Load environment variables from .env file
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser())
 
 app.use("/user", userRoutes);
 app.use("/book", bookRoutes);
