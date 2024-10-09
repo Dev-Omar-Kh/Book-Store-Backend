@@ -4,20 +4,23 @@ import mongoose from "mongoose";
 import userRoutes from "./routes/user.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import bookRoutes from "./routes/book.routes.js";
+import newsRoutes from "./routes/news.routes.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import isAuth from "./middleware/isAuth.js";
+import isAdmin from "./middleware/isAdmin.js";
 // Load environment variables from .env file
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(cookieParser())
+app.use(cookieParser());
 
 app.use("/user", userRoutes);
 app.use("/book", bookRoutes);
 app.use("/authentication", authRoutes);
-
+app.use("/news", isAuth, isAdmin, newsRoutes);
 //Error handler route
 app.use((err, req, res, next) => {
 	const statusCode = err.statusCode || 500;
