@@ -8,7 +8,6 @@ import newsRoutes from "./routes/news.routes.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import isAuth from "./middleware/isAuth.js";
-import isAdmin from "./middleware/isAdmin.js";
 // Load environment variables from .env file
 dotenv.config();
 
@@ -20,7 +19,7 @@ app.use(cookieParser());
 app.use("/user", userRoutes);
 app.use("/book", bookRoutes);
 app.use("/authentication", authRoutes);
-app.use("/news", isAuth, isAdmin, newsRoutes);
+app.use("/news", isAuth, newsRoutes);
 //Error handler route
 app.use((err, req, res, next) => {
 	const statusCode = err.statusCode || 500;
