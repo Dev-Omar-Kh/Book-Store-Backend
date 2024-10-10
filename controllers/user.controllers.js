@@ -43,6 +43,11 @@ export const postUser = async (req, res, next) => {
 			errorHandler(400, "password should be 6 characters at least")
 		);
 	}
+	if (password != confirmPassword) {
+		return next(
+			errorHandler(400, "something went wrong")
+		);
+	}
 	//encrypt the user password
 	const hashedPassword = bcrypt.hashSync(password, 10);
 

@@ -25,19 +25,9 @@ const userSchema = new mongoose.Schema(
 			trim: true,
 			minLength: 6,
 		},
-		confirmPassword: {
+		role: {
 			type: String,
-			required: true,
-			trim: true,
-			minLength: 6,
-		},
-		isSigned: {
-			type: Boolean,
-			default: false,
-		},
-		isAdmin: {
-			type: Boolean,
-			default: false,
+			default: "GENERAL",
 		},
 	},
 	{ timestamps: true }
