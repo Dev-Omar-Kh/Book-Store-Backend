@@ -20,6 +20,20 @@ export const getUser = async (req, res, next) => {
 		return next(errorHandler(404, error.message));
 	}
 };
+export const getAllUsers = async (req, res, next) => {
+	try {
+		const users = await User.find({});
+		if (!users) {
+			throw Error("could not find the users");
+		}
+		//server respond after creating the user successfully
+		return res
+			.status(200)
+			.json({ success: true, data: users, message: "users fetched" });
+	} catch (error) {
+		return next(errorHandler(404, error.message));
+	}
+};
 
 export const postUser = async (req, res, next) => {
 	const { username, email, phone, password, confirmPassword } = req.body;

@@ -47,7 +47,7 @@ export const updateNews = async (req, res, next) => {
 			data: updated,
 		});
 	} catch (error) {
-		return next(errorHandler(400, "adding news failed"));
+		return next(errorHandler(400, "updating news failed"));
 	}
 };
 export const deleteNews = async (req, res, next) => {
