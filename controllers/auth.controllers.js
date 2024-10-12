@@ -26,22 +26,28 @@ export const emailSignIn = async (req, res, next) => {
 		await user.save();
 
 		const token = jwt.sign(
-			{ id: user._id, email: user.email },
+			{
+				id: user._id,
+				username: user.username,
+				email: user.email,
+				phone: user.phone,
+				role: user.role,
+			},
 			process.env.SECRET_KEY,
-			{ expiresIn: "1h" }
+			{ expiresIn: "7h" }
 		);
 		console.log(token);
 
-		const { password, ...rest } = user._doc;
+		// const { password, ...rest } = user._doc;
 
 		res.cookie("access_token", token, {
 			httpOnly: true,
-			maxAge: 60 * 60 * 1000,
+			maxAge: 7 * 60 * 60 * 1000,
 		});
 		return res.status(200).json({
 			success: true,
 			message: "Logged in successfully",
-			data: rest,
+			data: token,
 		});
 	} catch (error) {
 		return next(errorHandler(400, error.message));

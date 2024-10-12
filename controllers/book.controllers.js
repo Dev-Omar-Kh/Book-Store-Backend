@@ -1,5 +1,6 @@
 import { errorHandler } from "../middleware/errorHandler.js";
 import Book from "../models/book.js";
+
 export const addBook = async (req, res, next) => {
 	const { title, category, author, price, offer, description, image } =
 		req.body;
@@ -49,7 +50,7 @@ export const getBook = async (req, res, next) => {
 
 export const getAllBooks = async (req, res, next) => {
 	try {
-		const books = await Book.find();
+		const books = await Book.find({});
 		if (!books) {
 			throw new Error(404, "no books exist in database");
 		}
