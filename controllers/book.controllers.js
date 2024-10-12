@@ -79,4 +79,31 @@ export const getAllBooks = async (req, res, next) => {
 // 	}
 // };
 
-export const updateBook = as
+export const updateBook = async (req, res, next) => {
+	const { id } = req.params;
+	try {
+		const updated = await Book.findByIdAndUpdate({ _id: id }, req.body, {
+			new: true,
+		});
+		return res.status(200).json({
+			success: true,
+			message: "Book updated",
+			data: updated,
+		});
+	} catch (error) {
+		return next(errorHandler(400, "updating book failed"));
+	}
+};
+
+export const deleteBook = async (req, res, next) => {
+	const { id } = req.params;
+	try {
+		await Book.findByIdAndDelete({ _id: id });
+		return res.status(200).json({
+			success: true,
+			message: "book deleted",
+		});
+	} catch (error) {
+		return next(errorHandler(400, "removing book failed"));
+	}
+};
