@@ -27,6 +27,9 @@ const bookSchema = new mongoose.Schema(
 			type: Number,
 			required: true,
 		},
+		offer: {
+			type: Number,
+		},
 		image: {
 			type: String,
 			trim: true,
