@@ -78,3 +78,5 @@ export const getAllBooks = async (req, res, next) => {
 // 		return next(errorHandler(400, error.message));
 // 	}
 // };
+
+export const updateBook = as
