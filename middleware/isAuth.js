@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 const isAuth = (req, res, next) => {
 	const {access_token} = req.cookies;
-	console.log(req);
+	console.log(req.cookies);
 	if (!access_token) {
 		return next(errorHandler(401, "Authentication required"));
 	}
