@@ -40,12 +40,6 @@ export const emailSignIn = async (req, res, next) => {
 
 		// const { password, ...rest } = user._doc;
 
-		res.cookie("access_token", token, {
-			httpOnly: true,
-			secure: process.env.NODE_ENV === 'production',
-			sameSite: 'None',
-			maxAge: 7 * 60 * 60 * 1000
-		});
 		return res.status(200).json({
 			success: true,
 			message: "Logged in successfully",
