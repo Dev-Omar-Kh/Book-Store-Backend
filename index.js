@@ -11,10 +11,25 @@ import isAuth from "./middleware/isAuth.js";
 // Load environment variables from .env file
 dotenv.config();
 
+
+const allowedOrigins = [
+    "https://book-store-five-swart.vercel.app",
+    'http://localhost:3000',
+];
+
+// CORS options to check origin dynamically
 const corsOptions = {
-	origin: "https://book-store-five-swart.vercel.app",
-	credentials: true,
+    origin: function (origin, callback) {
+        // If there is no origin (e.g., same-origin request) or the origin is in the allowed list, allow the request
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true,  // Allow cookies to be sent with requests
 };
+
 const app = express();
 app.use(cors(corsOptions));
 app.use(express.json());
