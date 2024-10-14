@@ -1,8 +1,10 @@
 import { errorHandler } from "./errorHandler.js";
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
 const isAuth = (req, res, next) => {
-	const {access_token} = req.cookies;
+	console.log(req.cookies);
+
+	const { access_token } = req.cookies;
 	if (!access_token) {
 		return next(errorHandler(401, "Authentication required"));
 	}
