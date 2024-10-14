@@ -1,5 +1,6 @@
 import User from "../models/user.js";
 import { errorHandler } from "./errorHandler.js";
+import jwt from "jsonwebtoken";
 
 const isAdmin = async (req, res, next) => {
 	const { email } = req.user;

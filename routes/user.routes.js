@@ -11,7 +11,7 @@ import isAdmin from "../middleware/isAdmin.js";
 const router = express.Router();
 
 router.get("/single/:id", isAuth, getUser);
-router.get("/all-users", isAuth , isAdmin, getAllUsers);
+router.get("/all-users", isAuth, getAllUsers);
 router.post("/add-user", postUser);
 router.patch("/update/:id", isAuth, isAdmin,updateUser);
 router.delete("/delete/:id", isAuth, isAdmin, deleteUser);
