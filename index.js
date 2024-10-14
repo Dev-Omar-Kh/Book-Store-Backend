@@ -12,8 +12,12 @@ import isAuth from "./middleware/isAuth.js";
 
 dotenv.config();
 
+const corsOptions = {
+	origin: "https://book-store-five-swart.vercel.app",
+	credentials: true,
+};
 const app = express();
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use(express.json());
 

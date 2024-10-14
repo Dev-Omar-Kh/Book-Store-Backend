@@ -58,9 +58,7 @@ export const postUser = async (req, res, next) => {
 		);
 	}
 	if (password != confirmPassword) {
-		return next(
-			errorHandler(400, "something went wrong")
-		);
+		return next(errorHandler(400, "something went wrong"));
 	}
 	//encrypt the user password
 	const hashedPassword = bcrypt.hashSync(password, 10);
