@@ -42,7 +42,7 @@ export const emailSignIn = async (req, res, next) => {
 
 		res.cookie("access_token", token, {
 			httpOnly: true,
-			maxAge: 7 * 60 * 60 * 1000,
+			maxAge: 90 * 24 * 60 * 60 * 1000,
 			secure: true,
 			sameSite: "none",
 		});

@@ -2,9 +2,18 @@ import mongoose from "mongoose";
 
 const newsSchema = new mongoose.Schema(
 	{
-		title: String,
-		date: Date,
-		description: String,
+		title: {
+			type: String,
+			required: true,
+		},
+		description: {
+			type: String,
+			required: true,
+		},
+		date: {
+			type: String,
+			required: true,
+		},
 	},
 	{ timestamps: true }
 );
