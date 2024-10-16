@@ -34,7 +34,7 @@ export const emailSignIn = async (req, res, next) => {
 				role: user.role,
 			},
 			process.env.SECRET_KEY,
-			{ expiresIn: "7h" }
+			{ expiresIn: "90d" }
 		);
 		console.log(token);
 
