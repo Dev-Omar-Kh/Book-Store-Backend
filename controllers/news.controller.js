@@ -16,14 +16,14 @@ export const getNews = async (req, res, next) => {
 export const getSingleNews = async (req, res, next) => {
 	const { id } = req.params;
 	try {
-		const news = await News.findById({id});
+		const news = await News.findById({ _id: id });
 		return res.status(200).json({
 			success: true,
 			message: "news fetched",
 			data: news,
 		});
 	} catch (error) {
-		return next(errorHandler(400, "try again later"));
+		return next(errorHandler(400, error?.message || "try again later"));
 	}
 };
 export const addNews = async (req, res, next) => {
