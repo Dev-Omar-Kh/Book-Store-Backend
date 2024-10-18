@@ -130,3 +130,59 @@ export const updateProductCountInCart = async (req, res, next) => {
 		);
 	}
 };
+
+export const getTotalPrice = async (req, res, next) => {
+	const userId = req.user.id;
+	console.log(userId);
+	try {
+		const result = await Cart.aggregate([
+			{ $match: { userId: userId } },
+			{
+				$lookup: {
+					from: "books",
+					let: { bookId: { $toObjectId: "$bookId" } },
+					pipeline: [
+						{ $match: { $expr: { $eq: ["$_id", "$$bookId"] } } },
+					],
+					as: "bookDetails",
+				},
+			},
+			{ $unwind: "$bookDetails" },
+			{
+				$group: {
+					_id: null,
+					totalPrice: {
+						$sum: {
+							$multiply: ["$quantity", "$bookDetails.price"],
+						},
+					},
+					totalOfferedPrice: {
+						$sum: {
+							$multiply: ["$quantity", "$bookDetails.offer"],
+						},
+					},
+				},
+			},
+		]);
+		if (result.length > 0) {
+			res.status(200).json({
+				success: true,
+				message: "total price fetched",
+				totalPrice: result[0].totalPrice,
+				totalOfferedPrice: result[0].totalOfferedPrice,
+			});
+		} else {
+			return next(
+				errorHandler(
+					404,
+					err?.message ||
+						"An error occurred while calculating the total price."
+				)
+			);
+		}
+	} catch (error) {
+		return next(
+			errorHandler(500, err?.message || "Cart is empty or not found.")
+		);
+	}
+};
